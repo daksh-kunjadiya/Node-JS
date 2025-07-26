@@ -7,8 +7,8 @@ const Order = () => {
   const initialProducts = [
     {
       id: 1,
-      name: "Pizza",
-      desc: "Cheesy Margherita Pizza",
+      name: "Grilled Vegetable",
+      desc: "Grilled vegetables are a healthy, flavorful dish made by marinating.A healthy and colorful dish made by grilling assorted vegetables.",
       price: 150,
       count: 0,
       image:
@@ -16,8 +16,8 @@ const Order = () => {
     },
     {
       id: 2,
-      name: "Burger",
-      desc: "Spicy Veggie Burger",
+      name: "French Fries",
+      desc: "Thinly sliced or stick-shaped potatoes that are deep-fried until golden and crispy. Typically salted and served hot.",
       price: 120,
       count: 0,
       image:
@@ -25,8 +25,8 @@ const Order = () => {
     },
     {
       id: 3,
-      name: "Pasta",
-      desc: "Creamy Alfredo Pasta",
+      name: "Fried Chicken",
+      desc: "Chicken pieces coated in a seasoned batter or breadcrumbs, then deep-fried until crispy and golden on the outside.",
       price: 200,
       count: 0,
       image:
@@ -34,8 +34,8 @@ const Order = () => {
     },
     {
       id: 4,
-      name: "Sandwich",
-      desc: "Grilled Veg Sandwich",
+      name: "Burger",
+      desc: "A sandwich consisting of a patty (usually beef or chicken, but also vegetarian options) placed inside a bun.",
       price: 180,
       count: 0,
       image:
@@ -43,17 +43,17 @@ const Order = () => {
     },
     {
       id: 5,
-      name: "French Fries",
-      desc: "Crispy Masala Fries",
-      price: 90,
+      name: "Paneer Makhani",
+      desc: "A rich and creamy North Indian curry made with paneer (Indian cottage cheese) cubes simmered in a tomato-based gravy.",
+      price: 190,
       count: 0,
       image:
         "https://avatars.mds.yandex.net/i?id=371dbb5d4c49d4dfcdefe5d440a82eb02d7e8d93-9236689-images-thumbs&n=13",
     },
     {
       id: 6,
-      name: "Noodles",
-      desc: "Spicy Veg Hakka Noodles",
+      name: "Pizza",
+      desc: "An Italian-origin dish featuring a round, flat dough base topped with tomato sauce, cheese, and various toppings.",
       price: 220,
       count: 0,
       image:
@@ -113,7 +113,7 @@ const Order = () => {
 
   return (
     <main className="min-h-screen bg-gradient-to-br from-white via-gray-100 to-white font-sans text-black py-10 px-4 transition-all duration-500">
-      <h1 className="text-4xl font-extrabold text-center text-blue-600 mb-12 drop-shadow-md">
+      <h1 className="text-4xl font-extrabold text-center mb-12 drop-shadow-md">
         🍽️ Food Ordering
       </h1>
 
@@ -121,29 +121,28 @@ const Order = () => {
         {products.map((product) => (
           <div
             key={product.id}
-            className="bg-white border border-gray-200 rounded-3xl p-6 shadow-md hover:shadow-xl hover:scale-[1.02] transition-all duration-300 relative group"
+            className="bg-white border border-gray-200 rounded-3xl shadow-md hover:shadow-xl hover:scale-[1.02] transition-all duration-300 relative group"
           >
-            {/* Product Image & Info */}
-            <div className="flex items-center gap-5">
+            <div>
               <img
                 src={product.image}
                 alt={product.name}
-                className="rounded-2xl w-28 h-28 object-cover shadow-md transition-transform duration-300 group-hover:scale-110"
+                className="rounded-t-2xl w-full h-70 object-cover"
               />
-              <div className="flex-1">
-                <h2 className="text-lg font-semibold text-gray-800">
-                  {product.name}
-                </h2>
-                <p className="text-sm text-gray-500 line-clamp-2">
-                  {product.desc}
-                </p>
-                <p className="text-base font-medium text-green-600 mt-2">
+              <div className="mt-4 flex justify-between px-6 items-start">
+                <div>
+                  <h2 className="text-lg font-semibold text-gray-800">
+                    {product.name}
+                  </h2>
+                  <p className="text-sm text-gray-500">{product.desc}</p>
+                </div>
+                <p className="text-base font-medium text-green-600 ml-4 whitespace-nowrap">
                   ₹{product.price}
                 </p>
               </div>
             </div>
-            {/* counter */}
-            <div className="flex justify-between items-center mt-6">
+
+            <div className="flex justify-between items-center m-5">
               <div className="flex items-center gap-3">
                 <button
                   className="text-xl font-bold"
@@ -159,7 +158,6 @@ const Order = () => {
                   +
                 </button>
               </div>
-              {/* delete */}
               <button
                 onClick={() => handleDelete(product.id)}
                 className="text-red-500 text-sm font-medium hover:text-red-600 hover:underline transition duration-150 ease-in-out focus:outline-none focus:ring-2 focus:ring-red-300 rounded"
@@ -167,9 +165,9 @@ const Order = () => {
                 Delete
               </button>
             </div>
-            {/* Pricing */}
+
             {product.count > 0 && (
-              <p className="text-right text-sm text-gray-500 mt-3">
+              <p className="text-right text-sm text-gray-500 m-3">
                 SubTotal: ₹{product.count * product.price}
               </p>
             )}
@@ -226,11 +224,11 @@ const Order = () => {
               {["UPI", "Card", "Cash on Delivery"].map((method) => (
                 <label
                   key={method}
-                  className={`flex items-center gap-2 px-4 py-2 rounded-lg border ${
+                  className={`flex items-center gap-2 px-4 py-2 rounded-lg border transition-all duration-200 cursor-pointer ${
                     paymentMethod === method
-                      ? "bg-green-100 border-green-500 text-green-800 font-medium"
-                      : "border-gray-300 text-gray-600 hover:border-green-400 hover:text-green-700"
-                  } transition-all duration-200 cursor-pointer`}
+                      ? "bg-blue-100 border-blue-500 text-blue-800 font-medium"
+                      : "border-gray-300 text-gray-600 hover:border-blue-400 hover:text-blue-700"
+                  }`}
                 >
                   <input
                     type="radio"
@@ -238,7 +236,7 @@ const Order = () => {
                     value={method}
                     checked={paymentMethod === method}
                     onChange={(e) => setPaymentMethod(e.target.value)}
-                    className="accent-green-500"
+                    className="accent-blue-500"
                   />
                   {method}
                 </label>
