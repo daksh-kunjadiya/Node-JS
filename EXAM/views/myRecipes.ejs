@@ -1,0 +1,61 @@
+<div class="my-recipes-page">
+    <div class="page-header">
+        <h2>👨‍🍳 My Recipe Collection</h2>
+        <p>Your personal culinary creations</p>
+    </div>
+
+    <div class="recipes-grid">
+        <% if (recipes && recipes.length > 0) { %>
+            <% recipes.forEach(recipe => { %>
+                <div class="recipe-card my-recipe">
+                    <div class="recipe-header">
+                        <h3><a href="/recipes/<%= recipe._id %>"><%= recipe.title %></a></h3>
+                        <div class="recipe-actions">
+                            <button onclick="deleteRecipe('<%= recipe._id %>')" class="delete-btn" title="Delete Recipe">
+                                🗑️
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="recipe-content">
+                        <div class="recipe-meta">
+                            <span class="difficulty <%= recipe.difficulty.toLowerCase() %>">
+                                <%= recipe.difficulty %>
+                            </span>
+                            <span class="category"><%= recipe.category %></span>
+                        </div>
+                        
+                        <p class="recipe-description"><%= recipe.description %></p>
+                        
+                        <div class="recipe-stats">
+                            <div class="stat">
+                                <span class="icon">⏱️</span>
+                                <span><%= recipe.cookingTime %> min</span>
+                            </div>
+                            <div class="stat">
+                                <span class="icon">🍽️</span>
+                                <span><%= recipe.servings %> servings</span>
+                            </div>
+                            <div class="stat">
+                                <span class="icon">💬</span>
+                                <span><%= recipe.comments.length %> comments</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="recipe-footer">
+                        <div class="recipe-date">
+                            Created: <%= new Date(recipe.createdAt).toLocaleDateString() %>
+                        </div>
+                    </div>
+                </div>
+            <% }) %>
+        <% } else { %>
+            <div class="empty-state">
+                <h3>🍳 No recipes yet!</h3>
+                <p>Start sharing your amazing recipes with the world!</p>
+                <a href="/recipes/new" class="btn btn-primary">Create Your First Recipe</a>
+            </div>
+        <% } %>
+    </div>
+</div>

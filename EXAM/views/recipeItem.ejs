@@ -1,0 +1,113 @@
+<div class="recipe-detail-page">
+    <div class="recipe-header">
+        <div class="recipe-title-section">
+            <h1><%= recipe.title %></h1>
+            <div class="recipe-meta">
+                <span class="difficulty <%= recipe.difficulty.toLowerCase() %>">
+                    <%= recipe.difficulty %>
+                </span>
+                <span class="category"><%= recipe.category %></span>
+            </div>
+        </div>
+        
+        <div class="recipe-stats-section">
+            <div class="stat">
+                <span class="icon">⏱️</span>
+                <span><%= recipe.cookingTime %> min</span>
+            </div>
+            <div class="stat">
+                <span class="icon">🍽️</span>
+                <span><%= recipe.servings %> servings</span>
+            </div>
+            <div class="stat">
+                <span class="icon">👨‍🍳</span>
+                <span>by <%= recipe.author.username %></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="recipe-content">
+        <div class="recipe-description">
+            <h3>📝 Description</h3>
+            <p><%= recipe.description %></p>
+        </div>
+
+        <div class="recipe-ingredients">
+            <h3>🛒 Ingredients</h3>
+            <ul class="ingredients-list">
+                <% recipe.ingredients.forEach(ingredient => { %>
+                    <li>
+                        <span class="quantity"><%= ingredient.quantity %></span>
+                        <span class="name"><%= ingredient.name %></span>
+                    </li>
+                <% }) %>
+            </ul>
+        </div>
+
+        <div class="recipe-instructions">
+            <h3>👩‍🍳 Instructions</h3>
+            <ol class="instructions-list">
+                <% recipe.instructions.forEach(instruction => { %>
+                    <li>
+                        <div class="step-content">
+                            <%= instruction.description %>
+                        </div>
+                    </li>
+                <% }) %>
+            </ol>
+        </div>
+    </div>
+
+    <div class="comments-section">
+        <h3>💬 Comments (<%= recipe.comments.length %>)</h3>
+        
+        <form action="/recipes/<%= recipe._id %>/comments" method="POST" class="comment-form">
+            <div class="form-group">
+                <label for="content">Add a Comment</label>
+                <textarea id="content" name="content" required rows="3" 
+                          placeholder="Share your thoughts about this recipe..."></textarea>
+            </div>
+            
+            <div class="form-group">
+                <label for="rating">Rating (optional)</label>
+                <select id="rating" name="rating">
+                    <option value="">No rating</option>
+                    <option value="5">⭐⭐⭐⭐⭐ Excellent</option>
+                    <option value="4">⭐⭐⭐⭐ Good</option>
+                    <option value="3">⭐⭐⭐ Okay</option>
+                    <option value="2">⭐⭐ Poor</option>
+                    <option value="1">⭐ Terrible</option>
+                </select>
+            </div>
+            
+            <button type="submit" class="btn btn-primary">💬 Add Comment</button>
+        </form>
+
+        <div class="comments-list">
+            <% if (recipe.comments.length > 0) { %>
+                <% recipe.comments.forEach(comment => { %>
+                    <div class="comment">
+                        <div class="comment-header">
+                            <span class="comment-author">👤 <%= comment.author.username %></span>
+                            <span class="comment-date">
+                                <%= new Date(comment.createdAt).toLocaleDateString() %>
+                            </span>
+                            <% if (comment.rating) { %>
+                                <span class="comment-rating">
+                                    <% for(let i = 0; i < comment.rating; i++) { %>⭐<% } %>
+                                </span>
+                            <% } %>
+                        </div>
+                        <div class="comment-content">
+                            <%= comment.content %>
+                        </div>
+                    </div>
+                <% }) %>
+            <% } else { %>
+                <div class="no-comments">
+                    <p>🤷‍♀️ No comments yet. Be the first to share your thoughts!</p>
+                </div>
+            <% } %>
+        </div>
+    </div>
+</div>

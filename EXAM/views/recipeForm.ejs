@@ -1,0 +1,84 @@
+<div class="recipe-form-page">
+    <div class="page-header">
+        <h2>🍳 Create New Recipe</h2>
+        <p>Share your culinary masterpiece with the world</p>
+    </div>
+
+    <% if (typeof error !== 'undefined' && error) { %>
+        <div class="alert alert-error">
+            <%= error %>
+        </div>
+    <% } %>
+
+    <form action="/recipes/new" method="POST" class="recipe-form">
+        <div class="form-group">
+            <label for="title">Recipe Title *</label>
+            <input type="text" id="title" name="title" required maxlength="100" 
+                   placeholder="e.g., Grandma's Chocolate Chip Cookies">
+        </div>
+
+        <div class="form-group">
+            <label for="description">Description *</label>
+            <textarea id="description" name="description" required maxlength="500" rows="3"
+                      placeholder="Brief description of your recipe..."></textarea>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label for="category">Category *</label>
+                <select id="category" name="category" required>
+                    <option value="">Choose category</option>
+                    <option value="Appetizer">🥗 Appetizer</option>
+                    <option value="Main Course">🍽️ Main Course</option>
+                    <option value="Dessert">🍰 Dessert</option>
+                    <option value="Beverage">🥤 Beverage</option>
+                    <option value="Snack">🍪 Snack</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="difficulty">Difficulty *</label>
+                <select id="difficulty" name="difficulty" required>
+                    <option value="Easy">😊 Easy</option>
+                    <option value="Medium" selected>🤔 Medium</option>
+                    <option value="Hard">😅 Hard</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label for="cookingTime">Cooking Time (minutes) *</label>
+                <input type="number" id="cookingTime" name="cookingTime" required min="1" 
+                       placeholder="30">
+            </div>
+
+            <div class="form-group">
+                <label for="servings">Servings *</label>
+                <input type="number" id="servings" name="servings" required min="1" 
+                       placeholder="4">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="ingredients">Ingredients *</label>
+            <textarea id="ingredients" name="ingredients" required rows="8"
+                      placeholder="Enter each ingredient on a new line. Format: quantity ingredient name&#10;Example:&#10;2 cups all-purpose flour&#10;1 tsp vanilla extract&#10;3 large eggs"></textarea>
+            <small class="form-help">💡 Enter each ingredient on a new line. Start with quantity, then ingredient name.</small>
+        </div>
+
+        <div class="form-group">
+            <label for="instructions">Instructions *</label>
+            <textarea id="instructions" name="instructions" required rows="10"
+                      placeholder="Enter each step on a new line. Be detailed and clear!&#10;Example:&#10;Preheat oven to 350°F&#10;Mix flour and baking powder in a large bowl&#10;In another bowl, cream butter and sugar"></textarea>
+            <small class="form-help">💡 Enter each step on a new line. Be clear and detailed.</small>
+        </div>
+
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">
+                🍳 Create Recipe
+            </button>
+            <a href="/recipes" class="btn btn-secondary">Cancel</a>
+        </div>
+    </form>
+</div>

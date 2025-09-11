@@ -1,0 +1,48 @@
+<div class="auth-page">
+    <div class="auth-container">
+        <div class="auth-header">
+            <h2>🍽️ Join Recipe Haven</h2>
+            <p>Create an account to start sharing your culinary creations</p>
+        </div>
+
+        <% if (error) { %>
+            <div class="alert alert-error">
+                <%= error %>
+            </div>
+        <% } %>
+
+        <form action="/auth/register" method="POST" class="auth-form">
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" required minlength="3" maxlength="20"
+                       placeholder="Choose a username">
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" name="email" required 
+                       placeholder="your@email.com">
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required minlength="6"
+                       placeholder="Create a strong password">
+            </div>
+
+            <div class="form-group">
+                <label for="confirmPassword">Confirm Password</label>
+                <input type="password" id="confirmPassword" name="confirmPassword" required minlength="6"
+                       placeholder="Confirm your password">
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-full">
+                🎉 Create Account
+            </button>
+        </form>
+
+        <div class="auth-links">
+            <p>Already have an account? <a href="/auth/login">Sign in here</a></p>
+        </div>
+    </div>
+</div>

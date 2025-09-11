@@ -1,0 +1,59 @@
+<div class="recipe-list-page">
+    <div class="page-header">
+        <h2>🍽️ Discover Amazing Recipes</h2>
+        <p>Explore our collection of mouth-watering recipes from talented home chefs</p>
+    </div>
+
+    <div class="recipes-grid">
+        <% if (recipes && recipes.length > 0) { %>
+            <% recipes.forEach(recipe => { %>
+                <div class="recipe-card">
+                    <div class="recipe-header">
+                        <h3><a href="/recipes/<%= recipe._id %>"><%= recipe.title %></a></h3>
+                        <div class="recipe-meta">
+                            <span class="difficulty <%= recipe.difficulty.toLowerCase() %>">
+                                <%= recipe.difficulty %>
+                            </span>
+                            <span class="category"><%= recipe.category %></span>
+                        </div>
+                    </div>
+                    
+                    <div class="recipe-content">
+                        <p class="recipe-description"><%= recipe.description %></p>
+                        
+                        <div class="recipe-stats">
+                            <div class="stat">
+                                <span class="icon">⏱️</span>
+                                <span><%= recipe.cookingTime %> min</span>
+                            </div>
+                            <div class="stat">
+                                <span class="icon">🍽️</span>
+                                <span><%= recipe.servings %> servings</span>
+                            </div>
+                            <div class="stat">
+                                <span class="icon">💬</span>
+                                <span><%= recipe.comments.length %> comments</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="recipe-footer">
+                        <div class="author-info">
+                            <span class="icon">👨‍🍳</span>
+                            <span>by <%= recipe.author.username %></span>
+                        </div>
+                        <div class="recipe-date">
+                            <%= new Date(recipe.createdAt).toLocaleDateString() %>
+                        </div>
+                    </div>
+                </div>
+            <% }) %>
+        <% } else { %>
+            <div class="empty-state">
+                <h3>🍳 No recipes yet!</h3>
+                <p>Be the first to share a delicious recipe with our community.</p>
+                <a href="/recipes/new" class="btn btn-primary">Create Your First Recipe</a>
+            </div>
+        <% } %>
+    </div>
+</div>
