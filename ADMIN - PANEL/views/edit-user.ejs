@@ -1,0 +1,20 @@
+<h1>
+    <%= title %>
+</h1>
+<% if (error) { %>
+    <p class="error">
+        <%= error %>
+    </p>
+    <% } %>
+        <form method="POST" action="<%= title === 'Create User' ? '/admin/users' : '/admin/users/' + userData._id %>">
+            <label>Email: <input type="email" name="email" value="<%= userData.email %>" required></label>
+            <label>Password: <input type="password" name="password" placeholder="Leave blank to keep current"></label>
+            <label>Role:
+                <select name="role">
+                    <option value="user" <%=userData.role==='user' ? 'selected' : '' %>>User </option>
+                    <option value="admin" <%=userData.role==='admin' ? 'selected' : '' %>>Admin</option>
+                </select>
+            </label>
+            <button type="submit">Save</button>
+        </form>
+        <a href="/admin/users">Back to Users</a>
